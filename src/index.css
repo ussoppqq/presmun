@@ -1,0 +1,16 @@
+@font-face {
+    font-family: "Horizon";
+    src: url("/fonts/Horizon.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "Montserrat";
+    src: url("/fonts/Montserrat-Regular.ttf") format("truetype");
+}
+
+@import "tailwindcss";
+
+@theme {
+    --font-horizon: "Horizon", sans-serif;
+    --font-montserrat: "Montserrat", sans-serif;
+}
