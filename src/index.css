@@ -14,3 +14,23 @@
     --font-horizon: "Horizon", sans-serif;
     --font-montserrat: "Montserrat", sans-serif;
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+    background: #00072d;
+}
+::-webkit-scrollbar-thumb {
+    background: #222a3f;
+    border-radius: 8px;
+    border: 2px solid #000420;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #f3c623;
+}
+::-webkit-scrollbar-track {
+    background: #000420;
+}
+html {
+    scrollbar-color: #222a3f #000420;
+    scrollbar-width: thin;
+}
