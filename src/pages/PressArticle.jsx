@@ -1,55 +1,66 @@
 import React, { useState } from 'react';
-import { FaNewspaper, FaCalendarAlt, FaUser, FaChevronDown, FaChevronUp, FaChevronRight } from 'react-icons/fa';
+import { FaNewspaper, FaCalendarAlt, FaUser, FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function PressArticle() {
-  const articles = [
-    {
-      title: "Global Diplomacy in Action: PresMUN 2025 Kicks Off",
-      delegate: "Alice Johnson",
-      date: "March 15, 2025",
-      excerpt: "The opening ceremony set a vibrant tone for PresMUN 2025, uniting delegates worldwide.",
-      description: "The opening ceremony of PresMUN 2025 was a spectacular event, bringing together delegates from diverse backgrounds to engage in global diplomacy. Keynote speeches and cultural performances highlighted the importance of unity and collaboration.",
-      image: "./alden.jpg"
-    },
-    {
-      title: "Climate Crisis Debates Heat Up at PresMUN",
-      delegate: "Bob Smith",
-      date: "March 16, 2025",
-      excerpt: "Delegates tackled climate change with innovative solutions and passionate debates.",
-      description: "Day two of PresMUN 2025 saw intense discussions in the Environmental Council, with delegates proposing bold strategies to combat climate change, including renewable energy initiatives and global carbon reduction frameworks.",
-      image: "./alden.jpg"
-    },
-    {
-      title: "PresMUN 2025: A Showcase of Young Diplomats",
-      delegate: "Clara Nguyen",
-      date: "March 17, 2025",
-      excerpt: "The awards ceremony celebrated the outstanding contributions of young diplomats.",
-      description: "The closing ceremony of PresMUN 2025 honored exceptional delegates with awards for diplomacy, position papers, and leadership. The event concluded with inspiring speeches and a call for continued global engagement.",
-      image: "./alden.jpg"
-    },
-  ];
-
+export default function PressArticles() {
   const [expandedArticle, setExpandedArticle] = useState(null);
 
-  const toggleArticle = (index) => {
-    setExpandedArticle(expandedArticle === index ? null : index);
+  const articles = [
+    {
+      id: 1,
+      title: "PresMUN 2025: Young Voices Shape Tomorrow",
+      author: "Sarah Mitchell",
+      date: "March 20, 2025",
+      readTime: "4 min read",
+      excerpt: "A focused gathering of 25 delegates from 15 countries delivered impactful solutions on climate action and digital diplomacy.",
+      content: `The intimate setting of PresMUN 2025 proved that meaningful diplomacy doesn't require massive crowds. With just 25 carefully selected delegates representing 15 nations, the conference fostered deeper conversations and more actionable outcomes than many larger events.
+
+The highlight came during the Climate Solutions Committee, where delegates from Denmark, Costa Rica, and Kenya collaborated to draft a youth-led carbon offset program. Their proposal, refined over two intensive sessions, garnered unanimous support and real-world implementation potential.
+
+"Small groups allow for genuine connection," noted delegate Maria Santos from Portugal. "We weren't just debating positions—we were building actual friendships across continents."
+
+The Digital Diplomacy Workshop introduced innovative approaches to international communication, with delegates creating a shared platform for ongoing collaboration beyond the conference.
+
+Awards recognized exceptional contribution rather than competition, with three delegates sharing the Outstanding Diplomat honor for their collaborative spirit and innovative thinking.
+
+As PresMUN 2025 concluded, participants committed to quarterly virtual meetings, transforming a weekend conference into an ongoing diplomatic network.`
+    },
+    {
+      id: 2,
+      title: "Innovation in Youth Diplomacy: PresMUN's Digital Revolution",
+      author: "James Rodriguez",
+      date: "March 22, 2025",
+      readTime: "3 min read",
+      excerpt: "How technology transformed traditional Model UN into a hybrid experience that bridges physical and virtual diplomatic engagement.",
+      content: `PresMUN 2025 broke new ground by seamlessly integrating digital tools with traditional diplomatic simulation, creating an experience that mirrors modern international relations.
+
+The conference introduced live translation capabilities, allowing delegates to communicate in their native languages while maintaining the flow of debate. This innovation particularly benefited the delegates from Brazil and Japan, who delivered their most passionate speeches in Portuguese and Japanese respectively.
+
+Virtual Reality sessions transported delegates to simulated crisis zones, providing unprecedented context for humanitarian discussions. The VR experience of visiting refugee camps brought tears to several participants and fundamentally changed the tone of policy debates.
+
+"Technology didn't replace human connection—it enhanced it," observed conference director Dr. Elena Vasquez. The hybrid format allowed remote participation from delegates in Australia and New Zealand, expanding the conference's global reach without losing intimacy.
+
+The most innovative feature was the real-time sentiment analysis of speeches, helping chairs identify when tensions were rising and when to call for cooling-off periods.
+
+This digital transformation sets a new standard for educational diplomacy, proving that tradition and innovation can coexist effectively.`
+    }
+  ];
+
+  const toggleArticle = (id) => {
+    setExpandedArticle(expandedArticle === id ? null : id);
   };
 
   return (
     <div className="bg-[#000420] min-h-screen text-white/90">
       {/* Background Pattern */}
       <div className="fixed inset-0 bg-[#000420]">
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage: 'radial-gradient(circle at 50% 50%, transparent 0%, #000420 70%)',
-            backgroundSize: '50px 50px'
-          }}
-        ></div>
+        <div className="absolute inset-0 opacity-20" style={{
+          backgroundImage: 'radial-gradient(circle at 50% 50%, transparent 0%, #000420 70%)',
+          backgroundSize: '50px 50px'
+        }}></div>
       </div>
 
-      <div className="relative py-16 sm:py-20 md:py-24 px-4 sm:px-6 md:px-8">
+      <div className="relative py-[5rem] sm:py-16 md:py-[10rem] px-4 sm:px-6 md:px-8">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <motion.div
@@ -62,110 +73,105 @@ export default function PressArticle() {
               <span className="text-[#f3c623]">Press</span>{' '}
               <span className="text-white">Articles</span>
             </h1>
-            <div className="h-px bg-gradient-to-r from-transparent via-[#f3c623] to-transparent opacity-50 max-w-md mx-auto mt-4"></div>
+            <div className="h-px bg-gradient-to-r from-transparent via-[#f3c623] to-transparent opacity-50 max-w-md mx-auto"></div>
           </motion.div>
 
-          {/* Articles Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
-            {articles.map((article, index) => (
+          {/* Articles Grid - Similar to Council Design */}
+          <div className="grid grid-cols-1 gap-8">
+            {articles.map((article) => (
               <motion.div
-                key={index}
+                key={article.id}
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{
-                  scale: 1.03,
-                  zIndex: 10,
-                  transition: { duration: 0.3 }
-                }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
-                className="relative bg-[#00072d]/70 rounded-xl overflow-hidden shadow-lg group"
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="relative"
               >
-                {/* Animated Border Effect */}
-                <div className="absolute inset-0 border-2 border-transparent group-hover:border-[#f3c623]/30 transition-all duration-300 rounded-xl pointer-events-none"></div>
+                {/* Article Card */}
+                <div
+                  className={`relative overflow-hidden rounded-xl cursor-pointer transition-all duration-300 ${expandedArticle === article.id ? 'bg-[#00072d]' : 'bg-[#00072d]/70 hover:bg-[#00072d]'}`}
+                  onClick={() => toggleArticle(article.id)}
+                >
+                  {/* Glow Effect */}
+                  <div className={`absolute inset-0 bg-gradient-to-br from-[#f3c623]/10 to-transparent opacity-0 ${expandedArticle === article.id ? 'opacity-100' : 'group-hover:opacity-50'} transition-opacity duration-300`}></div>
 
-                {/* Floating Elements */}
-                <div className="absolute -right-4 -top-4 w-16 h-16 rounded-full bg-[#f3c623]/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                <div className="absolute -left-4 -bottom-4 w-16 h-16 rounded-full bg-[#f3c623]/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  {/* Content */}
+                  <div className="relative z-10 p-6 sm:p-8">
+                    <div className="flex flex-col gap-4">
+                      {/* Title and Toggle */}
+                      <div className="flex justify-between items-start gap-4">
+                        <h2 className="font-horizon text-xl md:text-2xl text-[#f3c623]">
+                          {article.title}
+                        </h2>
+                        <button className="text-[#f3c623] p-1">
+                          {expandedArticle === article.id ? <FaChevronUp /> : <FaChevronDown />}
+                        </button>
+                      </div>
 
-                {/* Article Image */}
-                <div className="relative">
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="w-full h-48 sm:h-56 object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#000420]/80 to-transparent"></div>
-                </div>
-
-                {/* Article Content */}
-                <div className="relative p-6 flex flex-col">
-                  <h2 className="font-horizon text-lg sm:text-xl md:text-2xl text-[#f3c623] mb-3 group-hover:text-[#f3c623]/80 transition-colors">
-                    {article.title}
-                  </h2>
-                  <div className="flex items-center gap-4 text-white/60 mb-4 font-montserrat text-sm">
-                    <span className="flex items-center gap-2">
-                      <FaCalendarAlt /> {article.date}
-                    </span>
-                    <span className="flex items-center gap-2">
-                      <FaUser /> {article.delegate}
-                    </span>
-                  </div>
-                  <p className="text-white/70 font-montserrat text-sm mb-4">{article.excerpt}</p>
-
-                  {/* Expandable Content */}
-                  <AnimatePresence>
-                    {expandedArticle === index && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="mt-4"
-                      >
-                        <div className="pt-4 border-t border-[#f3c623]/20">
-                          <div className="relative pl-4">
-                            <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#f3c623] to-transparent"></div>
-                            <p className="text-white/80 leading-relaxed text-justify text-sm">
-                              {article.description}
-                            </p>
-                          </div>
+                      {/* Meta Info */}
+                      <div className="flex flex-wrap items-center gap-4 text-white/60 font-montserrat text-sm">
+                        <span className="flex items-center gap-2">
+                          <FaUser /> {article.author}
+                        </span>
+                        <span className="flex items-center gap-2">
+                          <FaCalendarAlt /> {article.date}
+                        </span>
+                        <div className="inline-block bg-[#f3c623]/10 px-3 py-1 rounded-full">
+                          <span className="text-[#f3c623]">{article.readTime}</span>
                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                      </div>
 
-                  {/* Buttons */}
-                  <div className="mt-4 flex justify-between items-center">
-                    <motion.button
-                      className="font-horizon text-[#f3c623] hover:text-white transition-colors flex items-center gap-2 text-sm sm:text-base"
-                      whileHover={{ x: 5 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      Read More
-                      <FaChevronRight />
-                    </motion.button>
-                    <button
-                      className="text-[#f3c623] p-1"
-                      onClick={() => toggleArticle(index)}
-                    >
-                      {expandedArticle === index ? <FaChevronUp /> : <FaChevronDown />}
-                    </button>
+                      {/* Excerpt */}
+                      <p className="text-white/80 font-montserrat text-base leading-relaxed italic">
+                        "{article.excerpt}"
+                      </p>
+                    </div>
+
+                    {/* Expanded Content */}
+                    <AnimatePresence>
+                      {expandedArticle === article.id && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="mt-6"
+                        >
+                          <div className="pt-6 border-t border-[#f3c623]/20">
+                            <div className="relative pl-6">
+                              <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#f3c623] to-transparent"></div>
+                              <div className="prose prose-invert max-w-none">
+                                {article.content.split('\n\n').map((paragraph, pIndex) => (
+                                  <motion.p
+                                    key={pIndex}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.3, delay: pIndex * 0.1 }}
+                                    className="text-white/80 leading-relaxed text-justify mb-4 font-montserrat"
+                                  >
+                                    {paragraph}
+                                  </motion.p>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
-                </div>
 
-                {/* Corner Accents */}
-                <div className="absolute top-0 left-0 w-6 h-6 border-l-2 border-t-2 border-[#f3c623] opacity-50"></div>
-                <div className="absolute bottom-0 right-0 w-6 h-6 border-r-2 border-b-2 border-[#f3c623] opacity-50"></div>
+                  {/* Corner Accents */}
+                  <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-[#f3c623] opacity-50"></div>
+                  <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-[#f3c623] opacity-50"></div>
+                </div>
               </motion.div>
             ))}
           </div>
 
-          {/* Bottom Decoration */}
+          {/* Footer Decoration */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
             className="mt-12 sm:mt-16 md:mt-20 flex items-center gap-4"
           >
             <div className="flex-1 h-px bg-gradient-to-r from-[#f3c623] to-transparent"></div>
